@@ -1,10 +1,55 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-
-import { loginWithGoogle, loginWithEmail } from "@/lib/auth";
-
+import { useRouter } from "next/navigation";
+import { loginWithGoogle, loginWithEmailDirect } from "@/lib/auth";
 import AuthImage from "@/components/Auth/AuthImage";
 
 export default function SignInPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const handleEmailLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const result = await loginWithEmailDirect(email, password);
+      if (result.success) {
+        router.push("/dashboard"); // Redirect on success
+      } else {
+        setError(result.error || "Login failed");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const result = await loginWithGoogle();
+      if (result.success) {
+        router.push("/dashboard"); // Redirect on success
+      } else {
+        setError(result.error || "Google login failed");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AuthImage
       imageUrl="/auth-bg.jpg"
@@ -13,7 +58,13 @@ export default function SignInPage() {
     >
       <h1 className="text-3xl font-bold mb-6">Welcome Back</h1>
 
-      <form action={loginWithEmail} className="space-y-4">
+      {error && (
+        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleEmailLogin} className="space-y-4">
         <div>
           <label htmlFor="email" className="block mb-1">
             Email
@@ -21,9 +72,11 @@ export default function SignInPage() {
           <input
             type="email"
             id="email"
-            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg"
+            disabled={isLoading}
           />
         </div>
 
@@ -34,17 +87,22 @@ export default function SignInPage() {
           <input
             type="password"
             id="password"
-            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg"
+            disabled={isLoading}
           />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+          className={`w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition ${
+            isLoading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
+          disabled={isLoading}
         >
-          Sign In
+          {isLoading ? "Signing In..." : "Sign In"}
         </button>
       </form>
 
@@ -55,11 +113,14 @@ export default function SignInPage() {
       </div>
 
       <button
-        onClick={loginWithGoogle}
-        className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-gray-100"
+        onClick={handleGoogleLogin}
+        className={`w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-gray-100 transition ${
+          isLoading ? "opacity-70 cursor-not-allowed" : ""
+        }`}
+        disabled={isLoading}
       >
         <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
-        Continue with Google
+        {isLoading ? "Processing..." : "Continue with Google"}
       </button>
 
       <div className="mt-6 text-center">

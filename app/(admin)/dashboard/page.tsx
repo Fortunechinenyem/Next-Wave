@@ -1,4 +1,4 @@
-"use client"; // Add this since we'll use client-side auth state
+"use client";
 
 import { auth } from "@/lib/firebase/config";
 import { onAuthStateChanged, User } from "firebase/auth";

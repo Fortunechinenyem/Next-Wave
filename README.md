@@ -1,1 +1,1 @@
-This is a Modern Blog breated with next js, Tailwind , Sanity and Firebase.
+This is a Modern Blog created with next js, Tailwind , Sanity and Firebase.

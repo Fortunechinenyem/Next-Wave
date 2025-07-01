@@ -39,7 +39,7 @@ export default function SignInPage() {
     try {
       const result = await loginWithGoogle();
       if (result.success) {
-        router.push("/dashboard"); // Redirect on success
+        router.push("/dashboardpages/userdashboard");
       } else {
         setError(result.error || "Google login failed");
       }

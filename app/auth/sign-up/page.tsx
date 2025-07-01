@@ -23,7 +23,7 @@ export default function SignUpPage() {
     try {
       const result = await registerWithEmailDirect(email, password);
       if (result.success) {
-        router.push("/dashboard"); // Redirect on success
+        router.push("/userdashboard");
       } else {
         setError(result.error || "Registration failed");
       }

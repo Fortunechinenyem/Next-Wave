@@ -27,9 +27,9 @@ export default function DashboardLayout({
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="relative flex h-screen bg-gray-50 overflow-hidden">
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex md:flex-shrink-0">
+      <div className="hidden md:flex md:flex-shrink-0 z-10">
         <div className="flex flex-col w-64 bg-white border-r border-gray-200">
           <div className="flex items-center justify-center h-16 px-4 bg-white">
             <h1 className="text-xl font-bold text-purple-600">NextWave</h1>
@@ -79,6 +79,7 @@ export default function DashboardLayout({
         </div>
       </div>
 
+      {/* Mobile Sidebar Overlay */}
       {mobileSidebarOpen && (
         <div
           className="fixed inset-0 z-20 bg-black bg-opacity-50 md:hidden"
@@ -86,6 +87,7 @@ export default function DashboardLayout({
         />
       )}
 
+      {/* Mobile Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-30 w-64 bg-white transform ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -145,7 +147,7 @@ export default function DashboardLayout({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1 overflow-hidden">
+      <div className="relative flex flex-col flex-1 overflow-hidden z-0">
         {/* Top Navigation */}
         <div className="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
           <button
@@ -181,7 +183,6 @@ export default function DashboardLayout({
           </div>
         </div>
 
-        {/* Page Content */}
         <main className="flex-1 p-4 overflow-y-auto md:p-6 bg-gray-50">
           {children}
         </main>

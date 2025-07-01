@@ -5,7 +5,6 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { Card, Metric, Text } from "@tremor/react";
 import { FileText } from "lucide-react";
-import DashboardLayout from "../layout";
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -33,7 +32,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <DashboardLayout user={user}>
+    <>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-600">
@@ -83,6 +82,6 @@ export default function DashboardPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

@@ -21,7 +21,7 @@ export default function HeroSection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button className="px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
-            Explore Articles
+            <Link href="/main/blog"> Explore Articles</Link>
           </button>
           <button className="px-8 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg font-medium hover:border-pink-500 transition-all duration-300 hover:scale-[1.02]">
             Join Community

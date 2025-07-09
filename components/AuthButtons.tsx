@@ -38,7 +38,7 @@ export default function AuthButtons({ user }: AuthButtonsProps) {
   };
 
   const handleAuthNavigation = () => {
-    router.push("/auth/sign-in"); // Navigate to sign-in page
+    router.push("/auth/sign-in");
   };
 
   return (
@@ -63,7 +63,7 @@ export default function AuthButtons({ user }: AuthButtonsProps) {
       ) : (
         <>
           <button
-            onClick={handleAuthNavigation} // Changed from direct login
+            onClick={handleAuthNavigation}
             className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition"
           >
             Sign In
@@ -71,7 +71,7 @@ export default function AuthButtons({ user }: AuthButtonsProps) {
           <button
             onClick={handleSignIn}
             disabled={isLoading}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition ${
+            className={`flex items-center gap-2 px-4 py-2 bg-purple-600 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >

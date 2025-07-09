@@ -1,53 +1,18 @@
-import AuthButtons from "@/components/AuthButtons";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { auth } from "@/lib/firebase/config";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default async function ContactPage() {
   const user = auth.currentUser;
 
   return (
     <div className="min-h-screen bg-gray-900 overflow-hidden">
-      {/* Background with subtle grid pattern */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
       </div>
 
-      {/* Header with updated styling */}
-      <header className="container mx-auto px-6 py-6 flex justify-between items-center">
-        <Link
-          href="/"
-          className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
-        >
-          NextWave
-        </Link>
-        <div className="flex items-center gap-6">
-          <nav className="hidden md:flex gap-6 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
-            <Link
-              href="/"
-              className="font-normal text-white hover:text-blue-400 transition text-sm"
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="font-normal text-white hover:text-blue-400 transition text-sm"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              className="font-normal text-white hover:text-blue-400 transition text-sm"
-            >
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <AuthButtons user={user} />
-          </div>
-        </div>
-      </header>
+      <Navbar user={user} />
 
       <main className="container mx-auto px-6 py-16">
         <div className="max-w-4xl mx-auto">
@@ -59,7 +24,6 @@ export default async function ContactPage() {
           </h1>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {/* Contact Information Card */}
             <div className="bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-700">
               <h2 className="text-2xl font-medium mb-6 text-purple-400">
                 Contact Information
@@ -145,7 +109,6 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            {/* Contact Form Card */}
             <div className="bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-700">
               <h2 className="text-2xl font-medium mb-6 text-purple-400">
                 Send Us a Message
@@ -203,7 +166,6 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* FAQ Section */}
           <div className="bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-700">
             <h2 className="text-2xl font-medium mb-6 text-purple-400">
               Frequently Asked Questions
@@ -241,136 +203,7 @@ export default async function ContactPage() {
         </div>
       </main>
 
-      {/* Footer with updated styling */}
-      <footer className="bg-gray-950 border-t border-gray-800 py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-lg font-medium mb-4 text-white">Explore</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Latest
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Popular
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Editors' Picks
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4 text-white">
-                Categories
-              </h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    AI
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Web Dev
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Design
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4 text-white">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/about"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Careers
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4 text-white">Legal</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Terms
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Privacy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    className="hover:text-blue-400 transition text-gray-400"
-                  >
-                    Cookies
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-gray-800 text-center">
-            <p className="text-gray-500">
-              © {new Date().getFullYear()} NextWave. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

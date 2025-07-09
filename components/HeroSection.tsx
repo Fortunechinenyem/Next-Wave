@@ -31,7 +31,6 @@ export default function HeroSection() {
           culture.
         </p>
 
-        {/* CTA buttons with reference styling */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/blog"

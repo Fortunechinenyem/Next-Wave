@@ -71,38 +71,43 @@ export default async function BlogPage() {
   const user = auth.currentUser;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gray-900 overflow-hidden">
+      {/* Background with subtle grid pattern */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 dark:opacity-5" />
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
       </div>
 
+      {/* Header with updated styling */}
       <header className="container mx-auto px-6 py-6 flex justify-between items-center">
         <Link
           href="/"
-          className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
         >
           NextWave
         </Link>
         <div className="flex items-center gap-6">
-          <nav className="hidden md:flex gap-6">
+          <nav className="hidden md:flex gap-6 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
             <Link
               href="/"
-              className="font-medium hover:text-blue-600 transition"
+              className="font-normal text-white hover:text-blue-400 transition text-sm"
             >
               Home
             </Link>
-            <Link href="/blog" className="font-medium text-blue-600 transition">
+            <Link
+              href="/blog"
+              className="font-normal text-white hover:text-blue-400 transition text-sm"
+            >
               Blog
             </Link>
             <Link
               href="/about"
-              className="font-medium hover:text-purple-600 transition"
+              className="font-normal text-white hover:text-blue-400 transition text-sm"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="font-medium hover:text-indigo-600 transition"
+              className="font-normal text-white hover:text-blue-400 transition text-sm"
             >
               Contact
             </Link>
@@ -116,19 +121,22 @@ export default async function BlogPage() {
 
       <main className="container mx-auto px-6 py-16">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-5xl font-bold mb-6 text-center">
-            <span className="relative inline-block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              NextWave Blog
-              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-            </span>
-          </h1>
+          {/* Blog Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-medium mb-6 text-white tracking-tighter">
+              <span className="relative inline-block">
+                NextWave Blog
+                <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+              </span>
+            </h1>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Explore the latest in technology, design, culture, and trends with
+              our in-depth articles and tutorials.
+            </p>
+          </div>
 
-          <p className="text-xl text-center text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">
-            Explore the latest in technology, design, culture, and trends with
-            our in-depth articles and tutorials.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {/* Category Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
               { name: "Tech", icon: "💻", count: 12 },
               { name: "Design", icon: "🎨", count: 8 },
@@ -138,55 +146,76 @@ export default async function BlogPage() {
               <Link
                 key={index}
                 href={`/blog/${category.name.toLowerCase()}`}
-                className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-lg transition"
+                className="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition group"
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl">{category.icon}</span>
+                  <span className="text-3xl group-hover:text-purple-400 transition">
+                    {category.icon}
+                  </span>
                   <div>
-                    <h3 className="text-xl font-bold">{category.name}</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      {category.count} articles
-                    </p>
+                    <h3 className="text-xl font-medium text-white group-hover:text-purple-400 transition">
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-400">{category.count} articles</p>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-blue-600 dark:text-purple-400">
+          {/* Featured Articles */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-medium mb-8 text-purple-400">
               Featured Articles
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               {blogPosts.slice(0, 2).map((post) => (
                 <div
                   key={post.id}
-                  className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800"
+                  className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition"
                 >
-                  <div className="h-48 bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                  <div className="h-64 bg-gray-700 overflow-hidden">
                     {/* Replace with actual image */}
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <div className="w-full h-full flex items-center justify-center text-gray-500">
                       Featured Image
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-purple-400 rounded-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="px-3 py-1 text-xs font-medium bg-gray-700 text-purple-400 rounded-full">
                         {post.category}
                       </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                      <span className="text-sm text-gray-400">
                         {post.date} · {post.readTime}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">{post.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      {post.excerpt}
-                    </p>
+                    <h3 className="text-xl font-medium text-white mb-3">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-400 mb-5">{post.excerpt}</p>
                     <Link
                       href={`/blog/${post.id}`}
-                      className="text-blue-600 dark:text-purple-400 font-medium hover:underline"
+                      className="text-purple-400 font-medium hover:underline flex items-center gap-2"
                     >
-                      Read more →
+                      Read more
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 8H13"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                        <path
+                          d="M8 3L13 8L8 13"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
                     </Link>
                   </div>
                 </div>
@@ -194,40 +223,57 @@ export default async function BlogPage() {
             </div>
           </div>
 
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 text-blue-600 dark:text-purple-400">
+          {/* Latest Articles */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-medium mb-8 text-purple-400">
               Latest Articles
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts.map((post) => (
                 <div
                   key={post.id}
-                  className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-lg transition"
+                  className="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500 transition"
                 >
-                  <div className="h-40 bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                  <div className="h-48 bg-gray-700 overflow-hidden">
                     {/* Replace with actual image */}
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <div className="w-full h-full flex items-center justify-center text-gray-500">
                       Post Image
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-purple-400 rounded-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-3 py-1 text-xs font-medium bg-gray-700 text-purple-400 rounded-full">
                         {post.category}
                       </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {post.date}
-                      </span>
+                      <span className="text-sm text-gray-400">{post.date}</span>
                     </div>
-                    <h3 className="text-lg font-bold mb-2">{post.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                      {post.excerpt}
-                    </p>
+                    <h3 className="text-lg font-medium text-white mb-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-4">{post.excerpt}</p>
                     <Link
                       href={`/blog/${post.id}`}
-                      className="text-blue-600 dark:text-purple-400 text-sm font-medium hover:underline"
+                      className="text-purple-400 text-sm font-medium hover:underline flex items-center gap-1"
                     >
-                      Read more →
+                      Read more
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 7H11"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                        <path
+                          d="M7 3L11 7L7 11"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
                     </Link>
                   </div>
                 </div>
@@ -235,17 +281,144 @@ export default async function BlogPage() {
             </div>
           </div>
 
+          {/* Load More Button */}
           <div className="flex justify-center">
-            <button className="bg-white dark:bg-gray-900 text-blue-600 dark:text-purple-400 font-medium px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+            <button className="bg-gray-800 text-white font-medium px-6 py-3 rounded-lg border border-gray-700 hover:bg-gray-700 hover:border-purple-500 transition">
               Load More Articles
             </button>
           </div>
         </div>
       </main>
 
-      {/* Reuse the same footer from homepage */}
-      <footer className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-12">
-        {/* ... same footer content as homepage ... */}
+      {/* Footer */}
+      <footer className="bg-gray-950 border-t border-gray-800 py-12">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="text-lg font-medium mb-4 text-white">Explore</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Latest
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Popular
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Editors' Picks
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium mb-4 text-white">
+                Categories
+              </h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    AI
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Web Dev
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Design
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium mb-4 text-white">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/about"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Careers
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium mb-4 text-white">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-blue-400 transition text-gray-400"
+                  >
+                    Cookies
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-gray-800 text-center">
+            <p className="text-gray-500">
+              © {new Date().getFullYear()} NextWave. All rights reserved.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
